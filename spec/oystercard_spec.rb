@@ -36,8 +36,8 @@ context 'has funds' do
     describe '#touch_in' do
 
       it 'remembers entry station' do
-        card.touch_in(station)
-        expect(card.entry_station).to eq station
+       card.touch_in(station)
+       expect(card.journey_history.last.entry_station).to eq station
       end
     end
 

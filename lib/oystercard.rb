@@ -18,20 +18,12 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds" if balance < MIN_BALANCE
-    @entry_station = station
+    deduct_fare
     start_journey(station)
   end
 
-  def touch_out(fare = MIN_FARE, station)
-    deduct(fare)
-    @exit_station = station
+  def touch_out(station)
     end_journey(station)
-  end
-
-  def save_journey
-    key = @entry_station
-    value = @exit_station
-    @journey_history << {key => value}
   end
 
   private
@@ -42,11 +34,11 @@ class Oystercard
   end
 
   def end_journey(station)
-      @journey_history.last.end_journey(station)
-  end    
+    @journey_history.last.end_journey(station)
+  end
 
-  def deduct(amount)
-    @balance -= @journey_history.last.end_journey.fare
+  def deduct_fare
+    @balance -= @journey_history.last.end_journey.fare if !@journey_history.empty?
   end
 
 end
