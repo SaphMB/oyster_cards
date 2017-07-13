@@ -20,6 +20,7 @@ describe Journey do
       end
 
       it 'calculate fare for a complete journey' do
+        p journey
         expect(journey.fare).to eq Journey::MINIMUM_FARE
       end
 

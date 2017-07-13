@@ -35,9 +35,6 @@ class Oystercard
   end
 
   private
-  def deduct(amount)
-    @balance -= amount
-  end
 
   def start_journey(station)
     journey = Journey.new(station)
@@ -48,6 +45,8 @@ class Oystercard
       @journey_history.last.end_journey(station)
   end    
 
-
+  def deduct(amount)
+    @balance -= @journey_history.last.end_journey.fare
+  end
 
 end
